@@ -475,6 +475,11 @@ h2.sngl:before {
     background: url(../img/drinks.jpg) center center no-repeat;
     background-size: cover
 }
+.menu .menu-card .ruracio {
+    padding: 40px 10px;
+    background: url(../img/ruracio.jpg) center center no-repeat;
+    background-size: cover
+}
 
 .menu .menu-card .half ul {
     list-style: none;
