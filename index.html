@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/calc.css">
         <!-- animate min css -->
         <link rel="stylesheet" href="css/animate.min.css">
         <lin rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,29 +57,41 @@ Events</a></li>
             </ul>
             <div class="menu-card wow fadeInUp">
                 <!-- main id -->
-                <div id="wedding" class="card">
+                <div  id="wedding" class="card" >
                 <div class="full main">
                     <h3>Weddings</h3>
                 </div>
                 <div class="half">
                     <ul>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
+                        <li>Buffet<span class="price"><input value="100" id="buffet" name="buffet"  type="checkbox" checked/></span></li>
+                        <li>Traditional<span class="price"><input value="100" id="traditional" name="traditional" type="checkbox" /></span></li>
+                        <li>Beverages<span class="price"><input value="100" id="beverages" name="beverages" type="checkbox" checked/></span></li>
+                        <li>Snacks<span class="price"><input value="100" id="snacks" name="snacks" type="checkbox" checked/></span></li>
                     </ul>
                 </div>
                 <div class="half">
                     <ul>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
-                        <li>Main Burger<span class="price">$15</span></li>
+                        <li>No. of Guests<span class="price"><select id="guests" name="guests" class="select-box" ><option value="20">1-20 guests</option><select></span></li>
+                        <li>Location<span class="price">
+                          <select id="location" name="location" class="select-box" >
+                            <option value="5000">Nyeri</option>
+                            <option value="20000">Warumae</option><select>
+                          </span></span></li>
+                        <li>Start date<span class="price"><input id="start_date" name="start_date" class="input-box" type="text" /></span></li>
+                        <li>End date<span class="price"><input id="end_date" name="end_date" class="input-box" type="text" /></span></li>
                     </ul>
+                </div>
+
+                <div class="half">
+                  <ul class="info calc-fonts">
+                      <li class="hidden">Transport: <strong id="transport_cost">Ksh. </strong></li>
+                      <li class="hidden">Food & Drinks: <strong id="food_drink_cost">Ksh. </strong></li>
+                      <li class="hidden">Service Charge: <strong id="service_charge">Ksh. </strong></li>
+                      <li class="hidden">Total: <strong><u id="total_cost">Ksh. 45,000</u></strong></li>
+                  </ul>
+                </div>
+                <div class="half">
+                  <a href="#" class="btn-main" onclick="calculate(event)">Get Quote</a>
                 </div>
                 </div> <!-- main id end -->
                 <!-- main id -->
@@ -285,6 +298,7 @@ Events</a></li>
         </footer>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="js/main.js"></script>
+        <script src="js/calc.js"></script>
         <!-- initialize wow -->
         <script src="js/wow.min.js"></script>
         <script> new WOW().init(); </script>

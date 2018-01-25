@@ -1,0 +1,19 @@
+.input-box input[type="text"]
+{
+  min-width: 188px !important;
+  color: #837972;
+}
+.select-box
+{
+  min-width: 188px !important;
+  color: #837972;
+}
+.calc-fonts{
+  font-family: sans-serif !important;
+  font-size: 1.3em !important;
+}
+.box-sized input,select{
+  -moz-box-sizing:border-box !important;
+  -webkit-box-sizing:border-box !important;
+  box-sizing:border-box !important;
+}
