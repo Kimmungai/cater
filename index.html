@@ -9,11 +9,13 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/calc.css">
+        <link rel="stylesheet" href="css/jquery-ui.min.css">
         <!-- animate min css -->
         <link rel="stylesheet" href="css/animate.min.css">
         <lin rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="js/vendor/jquery-1.11.2.min.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <!-- please register and switch the goole map api key to your own-->
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJqiG0aHr760nuzJd9Ycy7BSyCn6c3eZQ"></script>
     </head>
@@ -63,22 +65,22 @@ Events</a></li>
                 </div>
                 <div class="half">
                     <ul>
-                        <li>Buffet<span class="price"><input value="100" id="buffet" name="buffet"  type="checkbox" checked/></span></li>
-                        <li>Traditional<span class="price"><input value="100" id="traditional" name="traditional" type="checkbox" /></span></li>
-                        <li>Beverages<span class="price"><input value="100" id="beverages" name="beverages" type="checkbox" checked/></span></li>
-                        <li>Snacks<span class="price"><input value="100" id="snacks" name="snacks" type="checkbox" checked/></span></li>
+                        <li>Buffet<span class="price"><input value="100" id="buffet" name="buffet"  type="checkbox" onchange="calculate(event)" checked/></span></li>
+                        <li>Traditional<span class="price"><input value="100" id="traditional" name="traditional" type="checkbox" onchange="calculate(event)"/></span></li>
+                        <li>Beverages<span class="price"><input value="100" id="beverages" name="beverages" type="checkbox" onchange="calculate(event)" checked/></span></li>
+                        <li>Snacks<span class="price"><input value="100" id="snacks" name="snacks" type="checkbox" onchange="calculate(event)" checked/></span></li>
                     </ul>
                 </div>
                 <div class="half">
                     <ul>
-                        <li>No. of Guests<span class="price"><select id="guests" name="guests" class="select-box" ><option value="20">1-20 guests</option><select></span></li>
+                        <li>No. of Guests<span class="price"><select id="guests" name="guests" class="select-box" onchange="calculate(event)"><option value="20">1-20 guests</option><select></span></li>
                         <li>Location<span class="price">
-                          <select id="location" name="location" class="select-box" >
+                          <select id="location" name="location" class="select-box" onchange="calculate(event)">
                             <option value="5000">Nyeri</option>
                             <option value="20000">Warumae</option><select>
                           </span></span></li>
                         <li>Start date<span class="price"><input id="start_date" name="start_date" class="input-box" type="text" /></span></li>
-                        <li>End date<span class="price"><input id="end_date" name="end_date" class="input-box" type="text" /></span></li>
+                        <li>start time<span class="price"><select id="start_time" name="start_time" class="select-box"><option value="1:00">1:00 hrs</option><option value="2:00">2:00 hrs</option><select></span></li>
                     </ul>
                 </div>
 
@@ -88,10 +90,11 @@ Events</a></li>
                       <li class="hidden">Food & Drinks: <strong id="food_drink_cost">Ksh. </strong></li>
                       <li class="hidden">Service Charge: <strong id="service_charge">Ksh. </strong></li>
                       <li class="hidden">Total: <strong><u id="total_cost">Ksh. 45,000</u></strong></li>
+                      <li class="hidden"><a href="#reserve-form" class="btn-main">Reserve</a></li>
                   </ul>
                 </div>
                 <div class="half">
-                  <a href="#" class="btn-main" onclick="calculate(event)">Get Quote</a>
+                  <a href="#" class="btn-main" onclick="calculate(event,true)">Get Quote</a>
                 </div>
                 </div> <!-- main id end -->
                 <!-- main id -->
@@ -241,26 +244,9 @@ Events</a></li>
         <!-- happy hour -->
         <section class="hppy-hr parallax">
             <div class="wrap">
-            <h2 class="ylw wow fadeInRight">Happy Hour</h2>
-            <small class="wow fadeInLeft">Mon.-Fri.  17:30-19:00</small>
-            <div class="submenu wow fadeInUp">
-                <div class="half">
-                    <ul>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                    </ul>
-                </div>
-                <div class="half">
-                    <ul>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                        <li>Draft Beer<span class="price">$5</span></li>
-                    </ul>
-                </div>
-            </div>
+            <h2 class="ylw wow fadeInRight">Why choose us</h2>
+            <p>Stumptown copper mug lyft offal, VHS occupy bicycle rights hashtag squid raclette. Aesthetic chillwave cold-pressed kitsch fashion axe plaid. Seitan taiyaki fam mixtape meh edison bulb hella 90's 3 wolf moon helvetica umami quinoa vaporware. </p>
+            <p class="tel"><i class="fa fa-handshake-o" aria-hidden="true"></i></p>
             </div>
         </section>
         <!-- Map -->
@@ -269,12 +255,16 @@ Events</a></li>
         <section class="contact wow fadeIn">
             <div class="wrap subscribe">
                 <div class="half">
-                    <form role="form">
-                    <h2 class="ylw sngl">Talk to us</h2>
+                    <form role="form" id="reserve-form">
+                    <h2 class="ylw sngl">Reservation</h2>
                     <input type="text" placeholder="Your name" required="required">
-                    <input type="email" placeholder="email@email.com" required="required">
-                    <input type="text" placeholder="Your name" required="required">
-                    <input type="email" placeholder="email@email.com" required="required">
+                    <select class="location"><option value="5000">Nyeri</option>
+                    <option value="20000">Warumae</option><select></select>
+                    <input type="text" placeholder="Email" required="required">
+                    <select class="start_time"><option value="1:00">1:00 hrs</option><option value="2:00">2:00 hrs</option><select>
+                    <input class="guests" type="text" placeholder="number of guests" >
+                    <input id="end_date" class="start_date" type="text" placeholder="Starts on" value="" >
+                    <input class="total_cost" type="text" placeholder="Price" value="" disabled>
                     <input type="submit" val="Subscribe">
                     </form>
                 </div>
@@ -299,8 +289,25 @@ Events</a></li>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="js/main.js"></script>
         <script src="js/calc.js"></script>
+        <script src="js/jquery.number.min.js"></script>
         <!-- initialize wow -->
         <script src="js/wow.min.js"></script>
         <script> new WOW().init(); </script>
+        <script>
+          $( function() {
+            $( "#start_date" ).datepicker({
+              changeMonth: true,
+              changeYear: true
+            });
+          } );
+        </script>
+        <script>
+          $( function() {
+            $( "#end_date" ).datepicker({
+              changeMonth: true,
+              changeYear: true
+            });
+          } );
+        </script>
     </body>
 </html>
